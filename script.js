@@ -214,14 +214,25 @@ function changeLanguage(lang) {
     });
     document.querySelector(`[data-lang="${lang}"]`).classList.add('active');
 }
-}
 
 // Initialize language buttons
 document.addEventListener('DOMContentLoaded', function() {
+    // Initialize theme
+    document.documentElement.setAttribute('data-theme', currentTheme);
+    updateThemeIcon();
+
     // Add click handlers to language buttons
     document.querySelectorAll('.lang-btn').forEach(btn => {
         btn.addEventListener('click', function() {
             changeLanguage(this.dataset.lang);
         });
+    });
+
+    // Add theme toggle handler
+    document.getElementById('theme-toggle').addEventListener('click', function() {
+        currentTheme = currentTheme === 'light' ? 'dark' : 'light';
+        document.documentElement.setAttribute('data-theme', currentTheme);
+        localStorage.setItem('theme', currentTheme);
+        updateThemeIcon();
     });
 });
