@@ -4,33 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfolio de Vicpaltor</title>
-    <style>
-        body { font-family: Arial, sans-serif; line-height: 1.6; margin: 0; padding: 20px; background-color: #f4f4f4; }
-        header { background: #0056b3; color: white; padding: 40px 20px; text-align: center; }
-        header h1 { color: white; margin: 10px 0; }
-        header p { color: #f0f0f0; }
-        section { background: #fff; padding: 20px; margin-bottom: 20px; border-radius: 5px; }
-        h1, h2 { color: #333; }
-        .btn { display: inline-block; background: #007bff; color: #fff; padding: 10px 20px; text-decoration: none; border-radius: 5px; }
-        .btn:hover { background: #0056b3; }
-        .project { border-bottom: 1px solid #eee; padding-bottom: 20px; margin-bottom: 20px; }
-    </style>
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <div class="container">
+        <header>
+            <img src="perfil.jpeg" alt="Foto de Víctor" class="profile-img">
+            <h1>Hola, soy Víctor</h1>
+            <p>Desarrollador de Software | Proyectos y Demos</p>
+        </header>
 
-    <header>
-        <img src="perfil.jpeg" alt="Foto de Víctor" style="width:150px; height:150px; object-fit: cover; border-radius: 50%; border: 4px solid white; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
-        <h1>Hola, soy Víctor
-        <p>Desarrollador de Software | Proyectos y Demos</p>
-    </header>
-
-    <section>
+<section>
         <h2>Sobre mí</h2>
         <p>Soy Ingeniero Informático con trayectoria en desarrollo Back-end y automatización. 
             Proactivo y resolutivo, me enfoco en diseñar e implementar soluciones (APIs, microservicios, RPA) 
             que impulsan la eficiencia y calidad en entornos productivos. 
             Mi motor es la curiosidad y la mejora continua, buscando siempre el impacto en el negocio y el buen ambiente en el trabajo.</p>
-        <p>Email de contacto: victormpalostorres@gmail.com</p>
+        <div class="contact-info">
+            <p><strong>Email de contacto:</strong> victormpalostorres@gmail.com</p>
+        </div>
     </section>
 
     <section>
@@ -52,5 +44,6 @@
         </div>
     </section>
 
+</div>
 </body>
 </html>
