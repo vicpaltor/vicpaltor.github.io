@@ -199,16 +199,10 @@ function changeLanguage(lang) {
 
 // Initialize language buttons
 document.addEventListener('DOMContentLoaded', function() {
-    // Initialize theme
-    document.documentElement.setAttribute('data-theme', currentTheme);
-    updateThemeIcon();
-
     // Add click handlers to language buttons
     document.querySelectorAll('.lang-btn').forEach(btn => {
         btn.addEventListener('click', function() {
             changeLanguage(this.dataset.lang);
         });
     });
-
-
 });
