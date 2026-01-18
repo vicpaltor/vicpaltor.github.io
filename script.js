@@ -124,24 +124,6 @@ const translations = {
 };
 
 let currentLang = 'es';
-let currentTheme = localStorage.getItem('theme') || 'light';
-
-// Initialize theme
-document.documentElement.setAttribute('data-theme', currentTheme);
-updateThemeIcon();
-
-// Theme toggle functionality
-document.getElementById('theme-toggle').addEventListener('click', function() {
-    currentTheme = currentTheme === 'light' ? 'dark' : 'light';
-    document.documentElement.setAttribute('data-theme', currentTheme);
-    localStorage.setItem('theme', currentTheme);
-    updateThemeIcon();
-});
-
-function updateThemeIcon() {
-    const themeIcon = document.querySelector('.theme-icon');
-    themeIcon.textContent = currentTheme === 'light' ? '🌙' : '☀️';
-}
 
 function changeLanguage(lang) {
     currentLang = lang;
@@ -228,11 +210,5 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Add theme toggle handler
-    document.getElementById('theme-toggle').addEventListener('click', function() {
-        currentTheme = currentTheme === 'light' ? 'dark' : 'light';
-        document.documentElement.setAttribute('data-theme', currentTheme);
-        localStorage.setItem('theme', currentTheme);
-        updateThemeIcon();
-    });
+
 });
