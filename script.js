@@ -14,6 +14,41 @@ const translations = {
                 linkedin: "LinkedIn:"
             }
         },
+        skills: {
+            title: "Habilidades Técnicas",
+            languages: "Lenguajes",
+            frameworks: "Frameworks",
+            tools: "Herramientas",
+            databases: "Bases de Datos"
+        },
+        experience: {
+            title: "Experiencia Laboral",
+            job1: {
+                title: "Desarrollador Back-end",
+                company: "Empresa Tecnológica S.A.",
+                date: "2022 - Presente",
+                description: "Desarrollo de APIs REST y microservicios utilizando Java y Spring Boot. Implementación de soluciones de automatización con RPA para mejorar procesos empresariales. Colaboración en equipos ágiles siguiendo metodologías Scrum."
+            },
+            job2: {
+                title: "Junior Developer",
+                company: "StartUp Innovación",
+                date: "2020 - 2022",
+                description: "Desarrollo de aplicaciones web y mantenimiento de sistemas existentes. Participación en el diseño de arquitecturas de software y optimización de bases de datos. Soporte técnico y resolución de incidencias."
+            }
+        },
+        education: {
+            title: "Formación Académica",
+            degree1: {
+                title: "Ingeniería Informática",
+                institution: "Universidad Politécnica",
+                date: "2015 - 2020"
+            },
+            degree2: {
+                title: "Curso Especialización en Cloud Computing",
+                institution: "Platzi",
+                date: "2021"
+            }
+        },
         projects: {
             title: "Mis Proyectos",
             project1: {
@@ -122,6 +157,38 @@ function changeLanguage(lang) {
     projects[1].querySelector('h3').textContent = t.projects.project2.title;
     projects[1].querySelector('p').textContent = t.projects.project2.description;
     projects[1].querySelector('.btn').textContent = t.projects.project2.button;
+    
+    // Update skills section
+    document.querySelectorAll('section')[1].querySelector('h2').textContent = t.skills.title;
+    const skillCategories = document.querySelectorAll('.skill-category h4');
+    skillCategories[0].textContent = t.skills.languages;
+    skillCategories[1].textContent = t.skills.frameworks;
+    skillCategories[2].textContent = t.skills.tools;
+    skillCategories[3].textContent = t.skills.databases;
+    
+    // Update experience section
+    document.querySelectorAll('section')[2].querySelector('h2').textContent = t.experience.title;
+    const expItems = document.querySelectorAll('.experience-item');
+    expItems[0].querySelector('.experience-title').textContent = t.experience.job1.title;
+    expItems[0].querySelector('.experience-company').textContent = t.experience.job1.company;
+    expItems[0].querySelector('.experience-date').textContent = t.experience.job1.date;
+    expItems[0].querySelector('.experience-description').textContent = t.experience.job1.description;
+    
+    expItems[1].querySelector('.experience-title').textContent = t.experience.job2.title;
+    expItems[1].querySelector('.experience-company').textContent = t.experience.job2.company;
+    expItems[1].querySelector('.experience-date').textContent = t.experience.job2.date;
+    expItems[1].querySelector('.experience-description').textContent = t.experience.job2.description;
+    
+    // Update education section
+    document.querySelectorAll('section')[3].querySelector('h2').textContent = t.education.title;
+    const eduItems = document.querySelectorAll('.education-item');
+    eduItems[0].querySelector('.education-title').textContent = t.education.degree1.title;
+    eduItems[0].querySelector('.education-institution').textContent = t.education.degree1.institution;
+    eduItems[0].querySelector('.education-date').textContent = t.education.degree1.date;
+    
+    eduItems[1].querySelector('.education-title').textContent = t.education.degree2.title;
+    eduItems[1].querySelector('.education-institution').textContent = t.education.degree2.institution;
+    eduItems[1].querySelector('.education-date').textContent = t.education.degree2.date;
     
     // Update active button
     document.querySelectorAll('.lang-btn').forEach(btn => {
