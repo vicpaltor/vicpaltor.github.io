@@ -219,6 +219,38 @@ p {
     }
 }
 
+.language-switcher {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+    display: flex;
+    gap: 10px;
+}
+
+.lang-btn {
+    padding: 8px 12px;
+    background: rgba(255, 255, 255, 0.9);
+    border: 2px solid var(--primary-color);
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: var(--transition);
+    color: var(--primary-color);
+}
+
+.lang-btn:hover {
+    background: var(--primary-color);
+    color: white;
+    transform: translateY(-2px);
+}
+
+.lang-btn.active {
+    background: var(--primary-color);
+    color: white;
+}
+
 @media (max-width: 480px) {
     header h1 {
         font-size: 1.8rem;
@@ -235,5 +267,15 @@ p {
     .btn {
         padding: 10px 20px;
         font-size: 0.9rem;
+    }
+    
+    .language-switcher {
+        top: 10px;
+        right: 10px;
+    }
+    
+    .lang-btn {
+        padding: 6px 10px;
+        font-size: 0.8rem;
     }
 }
