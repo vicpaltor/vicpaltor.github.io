@@ -16,10 +16,17 @@ const translations = {
         },
         skills: {
             title: "Habilidades Técnicas",
+            architecture: "Arquitectura",
+            design: "Diseño",
             languages: "Lenguajes",
-            frameworks: "Frameworks",
-            tools: "Herramientas",
-            databases: "Bases de Datos"
+            spring: "Spring",
+            databases: "Bases de Datos",
+            deployment: "Despliegue",
+            versionControl: "Control de Versiones",
+            testing: "Testing",
+            frontend: "Front",
+            managementTools: "Herramientas de Gestión",
+            newTech: "Nuevas Tecnologías"
         },
         experience: {
             title: "Experiencia Laboral",
@@ -80,10 +87,17 @@ const translations = {
         },
         skills: {
             title: "Technical Skills",
+            architecture: "Architecture",
+            design: "Design",
             languages: "Languages",
-            frameworks: "Frameworks",
-            tools: "Tools",
-            databases: "Databases"
+            spring: "Spring",
+            databases: "Databases",
+            deployment: "Deployment",
+            versionControl: "Version Control",
+            testing: "Testing",
+            frontend: "Front",
+            managementTools: "Management Tools",
+            newTech: "New Technologies"
         },
         experience: {
             title: "Work Experience",
@@ -144,10 +158,17 @@ const translations = {
         },
         skills: {
             title: "Umiejętności Techniczne",
+            architecture: "Architektura",
+            design: "Projektowanie",
             languages: "Języki",
-            frameworks: "Frameworki",
-            tools: "Narzędzia",
-            databases: "Bazy Danych"
+            spring: "Spring",
+            databases: "Bazy Danych",
+            deployment: "Wdrożenie",
+            versionControl: "Kontrola Wersji",
+            testing: "Testowanie",
+            frontend: "Front",
+            managementTools: "Narzędzia Zarządzania",
+            newTech: "Nowe Technologie"
         },
         experience: {
             title: "Doświadczenie Pracy",
@@ -224,11 +245,18 @@ function changeLanguage(lang) {
             sections[i].querySelector('h2').textContent = t.skills.title;
             
             const skillCategories = sections[i].querySelectorAll('.skill-category h4');
-            if (skillCategories.length >= 4) {
-                skillCategories[0].textContent = t.skills.languages;
-                skillCategories[1].textContent = t.skills.frameworks;
-                skillCategories[2].textContent = t.skills.tools;
-                skillCategories[3].textContent = t.skills.databases;
+            if (skillCategories.length >= 11) {
+                skillCategories[0].textContent = t.skills.architecture;
+                skillCategories[1].textContent = t.skills.design;
+                skillCategories[2].textContent = t.skills.languages;
+                skillCategories[3].textContent = t.skills.spring;
+                skillCategories[4].textContent = t.skills.databases;
+                skillCategories[5].textContent = t.skills.deployment;
+                skillCategories[6].textContent = t.skills.versionControl;
+                skillCategories[7].textContent = t.skills.testing;
+                skillCategories[8].textContent = t.skills.frontend;
+                skillCategories[9].textContent = t.skills.managementTools;
+                skillCategories[10].textContent = t.skills.newTech;
             }
             break;
         }
