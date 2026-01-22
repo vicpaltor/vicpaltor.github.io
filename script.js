@@ -72,6 +72,11 @@ const translations = {
                 title: "PoC - Gestión Tributaria Legacy",
                 description: "Prueba de concepto para migración de sistema tributario desde Oracle Forms a arquitectura Java + PL/SQL. Simulación de valoración catastral con integración de sistema legacy.",
                 button: "Ver Código en GitHub"
+            },
+            project4: {
+                title: "Moscow Roots v1",
+                description: "Sistema de gestión de propiedad inmobiliaria con motor de valoración catastral avanzado. Arquitectura híbrida Java + PL/SQL para procesamiento transaccional.",
+                button: "Ver Código en GitHub"
             }
         }
     },
@@ -148,6 +153,11 @@ const translations = {
                 title: "PoC - Tax Management Legacy System",
                 description: "Proof of concept for tax system migration from Oracle Forms to Java + PL/SQL architecture. Catastral valuation simulation with legacy system integration.",
                 button: "View Code on GitHub"
+            },
+            project4: {
+                title: "Moscow Roots v1",
+                description: "Real estate property management system with advanced catastral valuation engine. Hybrid Java + PL/SQL architecture for transactional processing.",
+                button: "View Code on GitHub"
             }
         }
     },
@@ -223,6 +233,11 @@ const translations = {
             project3: {
                 title: "PoC - System Zarządzania Podatkami Legacy",
                 description: "Koncepcja proof dla migracji systemu podatkowego z Oracle Forms do architektury Java + PL/SQL. Symulacja wyceny katastralnej z integracją systemu legacy.",
+                button: "Zobacz Kod na GitHub"
+            },
+            project4: {
+                title: "Moscow Roots v1",
+                description: "System zarządzania nieruchomościami z zaawansowanym silnikiem wyceny katastralnej. Hybrydowa architektura Java + PL/SQL do przetwarzania transakcyjnego.",
                 button: "Zobacz Kod na GitHub"
             }
         }
@@ -372,6 +387,12 @@ function openModal(projectType) {
                                  'PoC - System Zarządzania Podatkami Legacy';
         demoContainer.innerHTML = getTributariaDemo();
         startTributariaDemo();
+    } else if (projectType === 'moscow-roots') {
+        modalTitle.textContent = currentLang === 'es' ? 'Moscow Roots v1 - Sistema Inmobiliario' : 
+                                 currentLang === 'en' ? 'Moscow Roots v1 - Real Estate System' : 
+                                 'Moscow Roots v1 - System Nieruchomości';
+        demoContainer.innerHTML = getMoscowRootsDemo();
+        startMoscowRootsDemo();
     }
 }
 
@@ -608,6 +629,151 @@ function getTributariaDemo() {
                     ${currentLang === 'es' ? 'Verificar Conexión' : 
                      currentLang === 'en' ? 'Check Connection' : 
                      'Sprawdź Połączenie'}
+                </button>
+            </div>
+        </div>
+    `;
+}
+
+function getMoscowRootsDemo() {
+    const titleText = currentLang === 'es' ? 'Sistema Avanzado de Gestión Inmobiliaria' : 
+                     currentLang === 'en' ? 'Advanced Real Estate Management System' : 
+                     'Zaawansowany System Zarządzania Nieruchomościami';
+    
+    const propertyData = [
+        { id: 'RU-001', address: 'Red Square 1', zone: 'KREMLIN', m2: 450, value: '€15.2M', type: 'Commercial' },
+        { id: 'RU-002', address: 'Arbat Street 23', zone: 'CENTRO', m2: 120, value: '€2.8M', type: 'Residential' },
+        { id: 'RU-003', address: 'Gorky Park 15', zone: 'PARK', m2: 85, value: '€1.1M', type: 'Residential' },
+        { id: 'RU-004', address: 'Moscow Business Center', zone: 'CBD', m2: 320, value: '€8.7M', type: 'Office' }
+    ];
+    
+    let propertyCards = '';
+    propertyData.forEach(property => {
+        const zoneColor = property.zone === 'KREMLIN' ? '#dc3545' : 
+                         property.zone === 'CENTRO' ? '#28a745' : 
+                         property.zone === 'CBD' ? '#007bff' : '#6c757d';
+        
+        const typeColor = property.type === 'Commercial' ? '#ffc107' : 
+                         property.type === 'Office' ? '#17a2b8' : '#28a745';
+        
+        propertyCards += `
+            <div class="moscow-property-card" onclick="selectMoscowProperty('${property.id}')">
+                <div style="display: flex; justify-content: space-between; align-items: start;">
+                    <div style="flex: 1;">
+                        <strong>${property.id}</strong>
+                        <div style="color: var(--text-light); font-size: 0.9rem; margin-top: 5px;">
+                            ${property.address}
+                        </div>
+                        <div style="margin-top: 8px;">
+                            <span class="zone-badge" style="background: ${zoneColor}; color: white; padding: 2px 8px; border-radius: 12px; font-size: 0.8rem;">
+                                ${property.zone}
+                            </span>
+                            <span class="type-badge" style="background: ${typeColor}; color: white; padding: 2px 8px; border-radius: 12px; font-size: 0.8rem; margin-left: 4px;">
+                                ${property.type}
+                            </span>
+                            <span style="margin-left: 8px; color: var(--text-light); font-size: 0.9rem;">
+                                ${property.m2} m²
+                            </span>
+                        </div>
+                    </div>
+                    <div style="text-align: right;">
+                        <div style="font-weight: bold; color: var(--primary-color); font-size: 1.1rem;">
+                            ${property.value}
+                        </div>
+                        <div style="color: var(--text-light); font-size: 0.8rem; margin-top: 2px;">
+                            ${currentLang === 'es' ? 'Valoración' : currentLang === 'en' ? 'Valuation' : 'Wycena'}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+    });
+    
+    return `
+        <div class="moscow-roots-demo">
+            <h3>${titleText}</h3>
+            
+            <div class="dashboard-grid">
+                <div class="metric-card">
+                    <h4>${currentLang === 'es' ? 'Propiedades Gestionadas' : 
+                           currentLang === 'en' ? 'Managed Properties' : 
+                           'Zarządzane Nieruchomości'}</h4>
+                    <div class="metric-value" id="managedProperties">1,847</div>
+                    <div class="metric-change positive">+18.2%</div>
+                </div>
+                <div class="metric-card">
+                    <h4>${currentLang === 'es' ? 'Valoración Total' : 
+                           currentLang === 'en' ? 'Total Valuation' : 
+                           'Całkowita Wycena'}</h4>
+                    <div class="metric-value" id="totalValuation">€847.3M</div>
+                    <div class="metric-change positive">+24.7%</div>
+                </div>
+                <div class="metric-card">
+                    <h4>${currentLang === 'es' ? 'Transacciones/Mes' : 
+                           currentLang === 'en' ? 'Transactions/Month' : 
+                           'Transakcje/Miesiąc'}</h4>
+                    <div class="metric-value" id="monthlyTransactions">127</div>
+                    <div class="metric-change positive">+12.4%</div>
+                </div>
+            </div>
+            
+            <div class="architecture-panel">
+                <h4>${currentLang === 'es' ? 'Arquitectura Híbrida Java + PL/SQL' : 
+                       currentLang === 'en' ? 'Hybrid Java + PL/SQL Architecture' : 
+                       'Hybrydowa Architektura Java + PL/SQL'}</h4>
+                <div class="architecture-flow">
+                    <div class="flow-step java-layer">
+                        <div class="step-icon">📱</div>
+                        <div class="step-title">${currentLang === 'es' ? 'Capa Java' : currentLang === 'en' ? 'Java Layer' : 'Warstwa Java'}</div>
+                        <div class="step-desc">${currentLang === 'es' ? 'Orquestación y UI' : currentLang === 'en' ? 'Orchestration & UI' : 'Orkiestracja i UI'}</div>
+                    </div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-step plsql-layer">
+                        <div class="step-icon">⚙️</div>
+                        <div class="step-title">${currentLang === 'es' ? 'Lógica PL/SQL' : currentLang === 'en' ? 'PL/SQL Logic' : 'Logika PL/SQL'}</div>
+                        <div class="step-desc">${currentLang === 'es' ? 'Cálculos y negocio' : currentLang === 'en' ? 'Business Logic' : 'Logika Biznesowa'}</div>
+                    </div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-step db-layer">
+                        <div class="step-icon">💾</div>
+                        <div class="step-title">${currentLang === 'es' ? 'Oracle DB' : currentLang === 'en' ? 'Oracle DB' : 'Baza Oracle'}</div>
+                        <div class="step-desc">${currentLang === 'es' ? 'Persistencia' : currentLang === 'en' ? 'Persistence' : 'Persistencja'}</div>
+                    </div>
+                </div>
+            </div>
+            
+            <h4 style="margin: 25px 0 15px 0;">
+                ${currentLang === 'es' ? 'Propiedades Premium' : 
+                 currentLang === 'en' ? 'Premium Properties' : 
+                 'Nieruchomości Premium'}
+            </h4>
+            <div id="moscowPropertyList">
+                ${propertyCards}
+            </div>
+            
+            <div class="control-panel">
+                <h4>${currentLang === 'es' ? 'Sistema de Control' : 
+                       currentLang === 'en' ? 'Control System' : 
+                       'System Kontroli'}</h4>
+                <button class="control-button" onclick="runValuation()">
+                    ${currentLang === 'es' ? 'Ejecutar Valoración' : 
+                     currentLang === 'en' ? 'Run Valuation' : 
+                     'Uruchom Wycenę'}
+                </button>
+                <button class="control-button" onclick="simulateTransaction()">
+                    ${currentLang === 'es' ? 'Simular Transacción' : 
+                     currentLang === 'en' ? 'Simulate Transaction' : 
+                     'Symuluj Transakcję'}
+                </button>
+                <button class="control-button" onclick="generateAnalytics()">
+                    ${currentLang === 'es' ? 'Generar Análisis' : 
+                     currentLang === 'en' ? 'Generate Analytics' : 
+                     'Generuj Analizę'}
+                </button>
+                <button class="control-button" onclick="showArchitecture()">
+                    ${currentLang === 'es' ? 'Ver Arquitectura' : 
+                     currentLang === 'en' ? 'Show Architecture' : 
+                     'Pokaż Architekturę'}
                 </button>
             </div>
         </div>
@@ -857,6 +1023,171 @@ function checkLegacyConnection() {
             statusText.textContent = currentLang === 'es' ? 'Conectado a Oracle Database' : 
                                     currentLang === 'en' ? 'Connected to Oracle Database' : 
                                     'Połączono z Oracle Database';
+        }, 1500);
+    }
+}
+
+// Moscow Roots Demo Interactive Functions
+function startMoscowRootsDemo() {
+    window.demoInterval = setInterval(() => {
+        updateMoscowMetrics();
+        updatePropertyValues();
+    }, 4000);
+}
+
+function updateMoscowMetrics() {
+    const managedProperties = document.getElementById('managedProperties');
+    const totalValuation = document.getElementById('totalValuation');
+    const monthlyTransactions = document.getElementById('monthlyTransactions');
+    
+    if (managedProperties) {
+        const current = parseInt(managedProperties.textContent.replace(/,/g, ''));
+        const increment = Math.floor(Math.random() * 3) + 1;
+        managedProperties.textContent = (current + increment).toLocaleString();
+    }
+    
+    if (totalValuation) {
+        const current = parseFloat(totalValuation.textContent.replace(/[^0-9.]/g, ''));
+        const change = (Math.random() - 0.3) * 2;
+        const newValue = Math.max(0, current + change);
+        totalValuation.textContent = '€' + newValue.toFixed(1) + 'M';
+    }
+    
+    if (monthlyTransactions) {
+        const current = parseInt(monthlyTransactions.textContent);
+        const change = Math.random() > 0.6 ? 1 : -1;
+        const newValue = Math.max(0, current + change);
+        monthlyTransactions.textContent = newValue;
+    }
+}
+
+function updatePropertyValues() {
+    const propertyList = document.getElementById('moscowPropertyList');
+    if (propertyList) {
+        const cards = propertyList.querySelectorAll('.moscow-property-card');
+        cards.forEach((card, index) => {
+            if (Math.random() > 0.7) {
+                const valueElement = card.querySelector('[style*="color: var(--primary-color)"]');
+                if (valueElement) {
+                    const currentValue = valueElement.textContent;
+                    const numericValue = parseFloat(currentValue.replace(/[^0-9.]/g, ''));
+                    const change = (Math.random() - 0.5) * 0.5;
+                    const newValue = Math.max(0.1, numericValue + change);
+                    
+                    // Determine if it's in millions or thousands
+                    if (currentValue.includes('M')) {
+                        valueElement.textContent = '€' + newValue.toFixed(1) + 'M';
+                    } else {
+                        valueElement.textContent = '€' + (newValue * 1000).toFixed(0) + 'K';
+                    }
+                    
+                    // Add highlight effect
+                    valueElement.style.color = '#28a745';
+                    setTimeout(() => {
+                        valueElement.style.color = 'var(--primary-color)';
+                    }, 1000);
+                }
+            }
+        });
+    }
+}
+
+function selectMoscowProperty(propertyId) {
+    const message = currentLang === 'es' ? `Propiedad seleccionada: ${propertyId}` : 
+                   currentLang === 'en' ? `Property selected: ${propertyId}` : 
+                   `Wybrano nieruchomość: ${propertyId}`;
+    console.log(message);
+    
+    // Highlight selected property
+    const cards = document.querySelectorAll('.moscow-property-card');
+    cards.forEach(card => card.style.border = '1px solid var(--border-color)');
+    event.currentTarget.style.border = '2px solid var(--primary-color)';
+}
+
+function runValuation() {
+    const message = currentLang === 'es' ? 'Iniciando motor de valoración avanzada...' : 
+                   currentLang === 'en' ? 'Starting advanced valuation engine...' : 
+                   'Uruchamianie zaawansowanego silnika wyceny...';
+    
+    console.log(message);
+    
+    // Animate valuation process
+    const flowSteps = document.querySelectorAll('.flow-step');
+    flowSteps.forEach((step, index) => {
+        step.style.opacity = '0.3';
+        setTimeout(() => {
+            step.style.opacity = '1';
+            step.style.transform = 'scale(1.05)';
+            setTimeout(() => {
+                step.style.transform = 'scale(1)';
+            }, 300);
+        }, index * 500);
+    });
+    
+    // Show completion message
+    setTimeout(() => {
+        const completionMessage = currentLang === 'es' ? '¡Valoración completada con IA!' : 
+                                 currentLang === 'en' ? 'Valuation completed with AI!' : 
+                                 'Wycena zakończona z AI!';
+        console.log(completionMessage);
+    }, 2000);
+}
+
+function simulateTransaction() {
+    const message = currentLang === 'es' ? 'Procesando transacción inmobiliaria...' : 
+                   currentLang === 'en' ? 'Processing real estate transaction...' : 
+                   'Przetwarzanie transakcji nieruchomościowej...';
+    
+    console.log(message);
+    
+    // Simulate transaction flow
+    const javaLayer = document.querySelector('.java-layer');
+    const plsqlLayer = document.querySelector('.plsql-layer');
+    const dbLayer = document.querySelector('.db-layer');
+    
+    [javaLayer, plsqlLayer, dbLayer].forEach((layer, index) => {
+        setTimeout(() => {
+            layer.style.background = 'rgba(0, 123, 255, 0.1)';
+            setTimeout(() => {
+                layer.style.background = '';
+            }, 800);
+        }, index * 600);
+    });
+}
+
+function generateAnalytics() {
+    const message = currentLang === 'es' ? 'Generando análisis predictivo de mercado...' : 
+                   currentLang === 'en' ? 'Generating market predictive analytics...' : 
+                   'Generowanie predykcyjnej analizy rynku...';
+    
+    console.log(message);
+    
+    // Highlight metrics
+    const metrics = document.querySelectorAll('.metric-value');
+    metrics.forEach((metric, index) => {
+        setTimeout(() => {
+            metric.style.color = '#28a745';
+            metric.style.transform = 'scale(1.1)';
+            setTimeout(() => {
+                metric.style.color = 'var(--primary-color)';
+                metric.style.transform = 'scale(1)';
+            }, 500);
+        }, index * 200);
+    });
+}
+
+function showArchitecture() {
+    const architecturePanel = document.querySelector('.architecture-panel');
+    if (architecturePanel) {
+        const originalBg = architecturePanel.style.background;
+        architecturePanel.style.background = 'linear-gradient(135deg, rgba(0, 123, 255, 0.05), rgba(40, 167, 69, 0.05))';
+        
+        setTimeout(() => {
+            architecturePanel.style.background = originalBg;
+            const message = currentLang === 'es' ? 'Arquitectura híbrida optimizada para rendimiento' : 
+                             currentLang === 'en' ? 'Hybrid architecture optimized for performance' : 
+                             'Hybrydowa architektura zoptymalizowana pod kątem wydajności';
+            console.log(message);
         }, 1500);
     }
 }
