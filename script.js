@@ -77,6 +77,11 @@ const translations = {
                 title: "Moscow Roots v1",
                 description: "Sistema de gestión de propiedad inmobiliaria con motor de valoración catastral avanzado. Arquitectura híbrida Java + PL/SQL para procesamiento transaccional.",
                 button: "Ver Código en GitHub"
+            },
+            project5: {
+                title: "Hotel Booking System",
+                description: "Sistema completo de reservas hoteleras desarrollado con Java 21, Spring Boot 3.5.7 y arquitectura hexagonal. API RESTful para gestión de hoteles y habitaciones.",
+                button: "Ver Código en GitHub"
             }
         }
     },
@@ -158,6 +163,11 @@ const translations = {
                 title: "Moscow Roots v1",
                 description: "Real estate property management system with advanced catastral valuation engine. Hybrid Java + PL/SQL architecture for transactional processing.",
                 button: "View Code on GitHub"
+            },
+            project5: {
+                title: "Hotel Booking System",
+                description: "Complete hotel booking system developed with Java 21, Spring Boot 3.5.7 and hexagonal architecture. RESTful API for hotel and room management.",
+                button: "View Code on GitHub"
             }
         }
     },
@@ -238,6 +248,11 @@ const translations = {
             project4: {
                 title: "Moscow Roots v1",
                 description: "System zarządzania nieruchomościami z zaawansowanym silnikiem wyceny katastralnej. Hybrydowa architektura Java + PL/SQL do przetwarzania transakcyjnego.",
+                button: "Zobacz Kod na GitHub"
+            },
+            project5: {
+                title: "Hotel Booking System",
+                description: "Kompletny system rezerwacji hotelowych opracowany z Java 21, Spring Boot 3.5.7 i architekturą heksagonalną. RESTful API do zarządzania hotelami i pokojami.",
                 button: "Zobacz Kod na GitHub"
             }
         }
@@ -393,6 +408,12 @@ function openModal(projectType) {
                                  'Moscow Roots v1 - System Nieruchomości';
         demoContainer.innerHTML = getMoscowRootsDemo();
         startMoscowRootsDemo();
+    } else if (projectType === 'hotel-booking') {
+        modalTitle.textContent = currentLang === 'es' ? 'Hotel Booking System - Gestión Hotelera' : 
+                                 currentLang === 'en' ? 'Hotel Booking System - Hotel Management' : 
+                                 'Hotel Booking System - Zarządzanie Hotelem';
+        demoContainer.innerHTML = getHotelBookingDemo();
+        startHotelBookingDemo();
     }
 }
 
@@ -780,6 +801,189 @@ function getMoscowRootsDemo() {
     `;
 }
 
+function getHotelBookingDemo() {
+    const titleText = currentLang === 'es' ? 'Sistema de Gestión Hotelera' : 
+                     currentLang === 'en' ? 'Hotel Management System' : 
+                     'System Zarządzania Hotelem';
+    
+    const hotelData = [
+        { id: 1, name: 'Grand Plaza Hotel', city: 'Madrid', stars: 5, rooms: 120, averagePrice: '€250', occupancy: '87%' },
+        { id: 2, name: 'Seaside Resort', city: 'Barcelona', stars: 4, rooms: 85, averagePrice: '€180', occupancy: '92%' },
+        { id: 3, name: 'Mountain Lodge', city: 'Sierra Nevada', stars: 3, rooms: 45, averagePrice: '€120', occupancy: '78%' },
+        { id: 4, name: 'Business Central', city: 'Valencia', stars: 4, rooms: 95, averagePrice: '€160', occupancy: '83%' }
+    ];
+    
+    const roomTypes = ['SINGLE', 'DOUBLE', 'SUITE', 'DELUXE'];
+    
+    let hotelCards = '';
+    hotelData.forEach(hotel => {
+        const starsHtml = '⭐'.repeat(hotel.stars);
+        const occupancyColor = parseInt(hotel.occupancy) > 85 ? '#28a745' : 
+                               parseInt(hotel.occupancy) > 75 ? '#ffc107' : '#dc3545';
+        
+        hotelCards += `
+            <div class="hotel-card" onclick="selectHotel(${hotel.id})">
+                <div style="display: flex; justify-content: space-between; align-items: start;">
+                    <div style="flex: 1;">
+                        <strong>${hotel.name}</strong>
+                        <div style="color: var(--text-light); font-size: 0.9rem; margin-top: 5px;">
+                            📍 ${hotel.city}
+                        </div>
+                        <div style="margin-top: 8px;">
+                            <span style="color: #ffc107;">${starsHtml}</span>
+                            <span style="margin-left: 10px; color: var(--text-light); font-size: 0.9rem;">
+                                ${hotel.rooms} ${currentLang === 'es' ? 'habitaciones' : currentLang === 'en' ? 'rooms' : 'pokoje'}
+                            </span>
+                        </div>
+                    </div>
+                    <div style="text-align: right;">
+                        <div style="font-weight: bold; color: var(--primary-color); font-size: 1.1rem;">
+                            ${hotel.averagePrice}
+                        </div>
+                        <div style="color: var(--text-light); font-size: 0.8rem; margin-top: 2px;">
+                            ${currentLang === 'es' ? 'noche' : currentLang === 'en' ? 'night' : 'noc'}
+                        </div>
+                        <div style="margin-top: 5px;">
+                            <span class="occupancy-badge" style="background: ${occupancyColor}; color: white; padding: 2px 8px; border-radius: 12px; font-size: 0.8rem;">
+                                ${hotel.occupancy}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+    });
+    
+    let roomTypeOptions = '';
+    roomTypes.forEach(type => {
+        roomTypeOptions += `<option value="${type}">${type}</option>`;
+    });
+    
+    return `
+        <div class="hotel-booking-demo">
+            <h3>${titleText}</h3>
+            
+            <div class="dashboard-grid">
+                <div class="metric-card">
+                    <h4>${currentLang === 'es' ? 'Hoteles Activos' : 
+                           currentLang === 'en' ? 'Active Hotels' : 
+                           'Aktywne Hotele'}</h4>
+                    <div class="metric-value" id="activeHotels">24</div>
+                    <div class="metric-change positive">+15.3%</div>
+                </div>
+                <div class="metric-card">
+                    <h4>${currentLang === 'es' ? 'Reservas Hoy' : 
+                           currentLang === 'en' ? "Today's Bookings" : 
+                           "Dzisiejsze Rezerwacje"}</h4>
+                    <div class="metric-value" id="todayBookings">147</div>
+                    <div class="metric-change positive">+8.7%</div>
+                </div>
+                <div class="metric-card">
+                    <h4>${currentLang === 'es' ? 'Tasa Ocupación' : 
+                           currentLang === 'en' ? 'Occupancy Rate' : 
+                           'Wskaźnik Obłożenia'}</h4>
+                    <div class="metric-value" id="occupancyRate">85.2%</div>
+                    <div class="metric-change positive">+2.4%</div>
+                </div>
+                <div class="metric-card">
+                    <h4>${currentLang === 'es' ? 'Ingresos Mensuales' : 
+                           currentLang === 'en' ? 'Monthly Revenue' : 
+                           'Miesięczne Przychody'}</h4>
+                    <div class="metric-value" id="monthlyRevenue">€1.8M</div>
+                    <div class="metric-change positive">+12.8%</div>
+                </div>
+            </div>
+            
+            <div class="architecture-panel">
+                <h4>${currentLang === 'es' ? 'Arquitectura Spring Boot + Java 21' : 
+                       currentLang === 'en' ? 'Spring Boot + Java 21 Architecture' : 
+                       'Architektura Spring Boot + Java 21'}</h4>
+                <div class="architecture-flow">
+                    <div class="flow-step java-layer">
+                        <div class="step-icon">🌐</div>
+                        <div class="step-title">${currentLang === 'es' ? 'REST API' : currentLang === 'en' ? 'REST API' : 'REST API'}</div>
+                        <div class="step-desc">${currentLang === 'es' ? 'Endpoints JSON' : currentLang === 'en' ? 'JSON Endpoints' : 'Endpointy JSON'}</div>
+                    </div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-step plsql-layer">
+                        <div class="step-icon">🏛️</div>
+                        <div class="step-title">${currentLang === 'es' ? 'Domain' : currentLang === 'en' ? 'Domain' : 'Domain'}</div>
+                        <div class="step-desc">${currentLang === 'es' ? 'Lógica de Negocio' : currentLang === 'en' ? 'Business Logic' : 'Logika Biznesowa'}</div>
+                    </div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-step db-layer">
+                        <div class="step-icon">🗄️</div>
+                        <div class="step-title">${currentLang === 'es' ? 'Spring Data JDBC' : currentLang === 'en' ? 'Spring Data JDBC' : 'Spring Data JDBC'}</div>
+                        <div class="step-desc">${currentLang === 'es' ? 'Persistencia' : currentLang === 'en' ? 'Persistence' : 'Persistencja'}</div>
+                    </div>
+                </div>
+            </div>
+            
+            <h4 style="margin: 25px 0 15px 0;">
+                ${currentLang === 'es' ? 'Nuestros Hoteles' : 
+                 currentLang === 'en' ? 'Our Hotels' : 
+                 'Nasze Hotele'}
+            </h4>
+            <div id="hotelList">
+                ${hotelCards}
+            </div>
+            
+            <div class="control-panel">
+                <h4>${currentLang === 'es' ? 'Panel de Gestión' : 
+                       currentLang === 'en' ? 'Management Panel' : 
+                       'Panel Zarządzania'}</h4>
+                <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 15px;">
+                    <button class="control-button" onclick="addNewHotel()">
+                        ${currentLang === 'es' ? '➕ Añadir Hotel' : 
+                         currentLang === 'en' ? '➕ Add Hotel' : 
+                         '➕ Dodaj Hotel'}
+                    </button>
+                    <button class="control-button" onclick="searchAvailableRooms()">
+                        ${currentLang === 'es' ? '🔍 Buscar Disponibilidad' : 
+                         currentLang === 'en' ? '🔍 Check Availability' : 
+                         '🔍 Sprawdź Dostępność'}
+                    </button>
+                    <button class="control-button" onclick="processBooking()">
+                        ${currentLang === 'es' ? '📅 Procesar Reserva' : 
+                         currentLang === 'en' ? '📅 Process Booking' : 
+                         '📅 Przetwórz Rezerwację'}
+                    </button>
+                    <button class="control-button" onclick="generateReport()">
+                        ${currentLang === 'es' ? '📊 Generar Informe' : 
+                         currentLang === 'en' ? '📊 Generate Report' : 
+                         '📊 Generuj Raport'}
+                    </button>
+                </div>
+                
+                <div style="background: #f8f9fa; padding: 15px; border-radius: var(--border-radius); margin-top: 15px;">
+                    <h5 style="margin: 0 0 10px 0; color: var(--text-color);">
+                        ${currentLang === 'es' ? 'Añadir Nueva Habitación' : 
+                         currentLang === 'en' ? 'Add New Room' : 
+                         'Dodaj Nowy Pokój'}
+                    </h5>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px;">
+                        <input type="text" id="roomNumber" placeholder="${currentLang === 'es' ? 'Número de habitación' : currentLang === 'en' ? 'Room number' : 'Numer pokoju'}" style="padding: 8px; border: 1px solid #ddd; border-radius: 4px;">
+                        <select id="roomType" style="padding: 8px; border: 1px solid #ddd; border-radius: 4px;">
+                            ${roomTypeOptions}
+                        </select>
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px;">
+                        <input type="number" id="roomPrice" placeholder="${currentLang === 'es' ? 'Precio por noche' : currentLang === 'en' ? 'Price per night' : 'Cena za noc'}" style="padding: 8px; border: 1px solid #ddd; border-radius: 4px;">
+                        <select id="hotelSelect" style="padding: 8px; border: 1px solid #ddd; border-radius: 4px;">
+                            ${hotelData.map(h => `<option value="${h.id}">${h.name}</option>`).join('')}
+                        </select>
+                    </div>
+                    <button class="control-button" onclick="addNewRoom()" style="width: 100%;">
+                        ${currentLang === 'es' ? '💾 Guardar Habitación' : 
+                         currentLang === 'en' ? '💾 Save Room' : 
+                         '💾 Zapisz Pokój'}
+                    </button>
+                </div>
+            </div>
+        </div>
+    `;
+}
+
 // Demo Interactive Functions
 function startHospitalDemo() {
     // Simulate real-time updates
@@ -1031,8 +1235,197 @@ function checkLegacyConnection() {
 function startMoscowRootsDemo() {
     window.demoInterval = setInterval(() => {
         updateMoscowMetrics();
-        updatePropertyValues();
     }, 4000);
+}
+
+// Hotel Booking Demo Interactive Functions
+function startHotelBookingDemo() {
+    window.demoInterval = setInterval(() => {
+        updateHotelMetrics();
+    }, 3000);
+}
+
+function updateHotelMetrics() {
+    const activeHotels = document.getElementById('activeHotels');
+    const todayBookings = document.getElementById('todayBookings');
+    const occupancyRate = document.getElementById('occupancyRate');
+    const monthlyRevenue = document.getElementById('monthlyRevenue');
+    
+    if (activeHotels) {
+        const current = parseInt(activeHotels.textContent);
+        const change = Math.random() > 0.7 ? 1 : 0;
+        activeHotels.textContent = current + change;
+    }
+    
+    if (todayBookings) {
+        const current = parseInt(todayBookings.textContent);
+        const increment = Math.floor(Math.random() * 3) + 1;
+        todayBookings.textContent = current + increment;
+    }
+    
+    if (occupancyRate) {
+        const current = parseFloat(occupancyRate.textContent);
+        const change = (Math.random() - 0.5) * 2;
+        const newValue = Math.max(70, Math.min(95, current + change));
+        occupancyRate.textContent = newValue.toFixed(1) + '%';
+    }
+    
+    if (monthlyRevenue) {
+        const current = parseFloat(monthlyRevenue.textContent.replace(/[^0-9.]/g, ''));
+        const change = (Math.random() - 0.3) * 0.1;
+        const newValue = Math.max(1.0, current + change);
+        monthlyRevenue.textContent = '€' + newValue.toFixed(1) + 'M';
+    }
+}
+
+function selectHotel(hotelId) {
+    const message = currentLang === 'es' ? `Hotel seleccionado: ID ${hotelId}` : 
+                   currentLang === 'en' ? `Hotel selected: ID ${hotelId}` : 
+                   `Wybrany hotel: ID ${hotelId}`;
+    console.log(message);
+    
+    // Highlight selected hotel
+    const cards = document.querySelectorAll('.hotel-card');
+    cards.forEach(card => card.style.border = '1px solid var(--border-color)');
+    event.currentTarget.style.border = '2px solid var(--primary-color)';
+}
+
+function addNewHotel() {
+    const hotelNames = [
+        'Luxury Towers Hotel', 'Coastal Paradise Resort', 'Urban Boutique Hotel', 
+        'Historic Grand Hotel', 'Modern Business Center'
+    ];
+    const cities = ['Lisbon', 'Porto', 'Málaga', 'Bilbao', 'Seville'];
+    
+    const randomName = hotelNames[Math.floor(Math.random() * hotelNames.length)];
+    const randomCity = cities[Math.floor(Math.random() * cities.length)];
+    const randomStars = Math.floor(Math.random() * 3) + 3;
+    const randomRooms = Math.floor(Math.random() * 100) + 50;
+    const randomPrice = '€' + (Math.floor(Math.random() * 200) + 100);
+    const randomOccupancy = (Math.floor(Math.random() * 30) + 60) + '%';
+    
+    const message = currentLang === 'es' ? 
+        `✅ Nuevo hotel añadido: ${randomName} en ${randomCity}` : 
+        currentLang === 'en' ? 
+        `✅ New hotel added: ${randomName} in ${randomCity}` : 
+        `✅ Nowy hotel dodany: ${randomName} w ${randomCity}`;
+    
+    console.log(message);
+    
+    // Update metrics
+    const activeHotels = document.getElementById('activeHotels');
+    if (activeHotels) {
+        const current = parseInt(activeHotels.textContent);
+        activeHotels.textContent = current + 1;
+    }
+    
+    alert(message);
+}
+
+function searchAvailableRooms() {
+    const message = currentLang === 'es' ? 
+        '🔍 Buscando habitaciones disponibles...' : 
+        currentLang === 'en' ? 
+        '🔍 Searching available rooms...' : 
+        '🔍 Wyszukiwanie dostępnych pokoi...';
+    
+    console.log(message);
+    
+    // Simulate search
+    setTimeout(() => {
+        const resultsMessage = currentLang === 'es' ? 
+            `📊 Se encontraron 24 habitaciones disponibles para las fechas seleccionadas` : 
+            currentLang === 'en' ? 
+            `📊 Found 24 available rooms for selected dates` : 
+            `📊 Znaleziono 24 dostępne pokoje na wybrane daty`;
+        
+        alert(resultsMessage);
+    }, 1500);
+}
+
+function processBooking() {
+    const message = currentLang === 'es' ? 
+        '📅 Procesando reserva...' : 
+        currentLang === 'en' ? 
+        '📅 Processing booking...' : 
+        '📅 Przetwarzanie rezerwacji...';
+    
+    console.log(message);
+    
+    // Simulate booking processing
+    setTimeout(() => {
+        const confirmationMessage = currentLang === 'es' ? 
+            '✅ Reserva confirmada! ID de confirmación: BKG-2025-' + Math.floor(Math.random() * 10000) : 
+            currentLang === 'en' ? 
+            '✅ Booking confirmed! Confirmation ID: BKG-2025-' + Math.floor(Math.random() * 10000) : 
+            '✅ Rezerwacja potwierdzona! ID potwierdzenia: BKG-2025-' + Math.floor(Math.random() * 10000);
+        
+        alert(confirmationMessage);
+        
+        // Update today's bookings
+        const todayBookings = document.getElementById('todayBookings');
+        if (todayBookings) {
+            const current = parseInt(todayBookings.textContent);
+            todayBookings.textContent = current + 1;
+        }
+    }, 2000);
+}
+
+function addNewRoom() {
+    const roomNumber = document.getElementById('roomNumber').value;
+    const roomType = document.getElementById('roomType').value;
+    const roomPrice = document.getElementById('roomPrice').value;
+    const hotelSelect = document.getElementById('hotelSelect').value;
+    
+    if (!roomNumber || !roomPrice) {
+        const errorMessage = currentLang === 'es' ? 
+            '❌ Por favor complete todos los campos' : 
+            currentLang === 'en' ? 
+            '❌ Please complete all fields' : 
+            '❌ Proszę uzupełnić wszystkie pola';
+        
+        alert(errorMessage);
+        return;
+    }
+    
+    const message = currentLang === 'es' ? 
+        `✅ Habitación ${roomNumber} (${roomType}) añadida correctamente - Precio: €${roomPrice}/noche` : 
+        currentLang === 'en' ? 
+        `✅ Room ${roomNumber} (${roomType}) added successfully - Price: €${roomPrice}/night` : 
+        `✅ Pokój ${roomNumber} (${roomType}) dodany pomyślnie - Cena: €${roomPrice}/noc`;
+    
+    console.log(message);
+    
+    // Clear form
+    document.getElementById('roomNumber').value = '';
+    document.getElementById('roomPrice').value = '';
+    
+    alert(message);
+}
+
+function updateMoscowMetrics() {
+    const managedProperties = document.getElementById('managedProperties');
+    const totalValuation = document.getElementById('totalValuation');
+    const monthlyTransactions = document.getElementById('monthlyTransactions');
+    
+    if (managedProperties) {
+        const current = parseInt(managedProperties.textContent.replace(/,/g, ''));
+        const increment = Math.floor(Math.random() * 5) + 1;
+        managedProperties.textContent = (current + increment).toLocaleString();
+    }
+    
+    if (totalValuation) {
+        const current = parseFloat(totalValuation.textContent.replace(/[^0-9.]/g, ''));
+        const change = (Math.random() - 0.2) * 10;
+        const newValue = Math.max(800, current + change);
+        totalValuation.textContent = '€' + newValue.toFixed(1) + 'M';
+    }
+    
+    if (monthlyTransactions) {
+        const current = parseInt(monthlyTransactions.textContent);
+        const increment = Math.floor(Math.random() * 4) + 1;
+        monthlyTransactions.textContent = current + increment;
+    }
 }
 
 function updateMoscowMetrics() {
