@@ -31,16 +31,28 @@ const translations = {
         experience: {
             title: "Experiencia Laboral",
             job1: {
-                title: "Backend Dev",
-                company: "Freelancer - Pequeñas empresas locales",
+                title: "Freelancer",
+                company: "Pequeñas empresas locales",
                 date: "06/2025 - Actual",
-                description: "Integración de soluciones mediante desarrollo de aplicaciones web con bases de datos Oracle. Diseño, escritura e implementación de microservicios con experiencia sólida en Java. Enfoque en pruebas unitarias, de integración y E2E. Mantenimiento, optimización y actualización de servicios. Colaboración con equipos multidisciplinares (DevOps, stakeholders). Soporte y mejora de servicios para Hoteles Barceló."
+                description: "Integración de soluciones mediante desarrollo de aplicaciones en bases de datos Oracle."
             },
             job2: {
-                title: "Software Dev / RPA",
+                title: "Back-end Developer",
                 company: "VIRTUALCAVE",
                 date: "10/2024 - 04/2025",
+                description: "Diseño, escritura e implementación de microservicios con experiencia sólida en Java. Enfoque en pruebas unitarias, de integración y E2E. Mantenimiento, optimización y actualización de servicios. Colaboración con equipos multidisciplinares (DevOps, stakeholders). Soporte y mejora de servicios para Hoteles Barceló."
+            },
+            job3: {
+                title: "RPA Developer",
+                company: "SERVINFORM S.A.",
+                date: "07/2022 - 09/2024",
                 description: "Integración de soluciones en PL/SQL y bases de datos NoSQL. Desarrollo de software alineado con especificaciones y buenas prácticas. Base sólida en Java (versión 8 en adelante) y .NET con frameworks como Spring Boot, Liferay, ASP.NET. Diseño, orquestación y optimización de automatizaciones de extremo a extremo. Automatización de procesos para clientes (Unicaja, etc.) logrando menos errores y mayor rapidez en operaciones clave. Tratamiento de archivos (Excel, CSV, PDF) y extracción de datos estructurados para eficiencia del negocio."
+            },
+            job4: {
+                title: "Junior Developer - Prácticas",
+                company: "INEBIR TECHNOLOGY S.L.",
+                date: "03/2022 - 04/2022",
+                description: "Investigación de soluciones IoT centradas en el sector sanitario. Desarrollo de aplicación móvil conectada con tecnologías de telecomunicación IoT."
             }
         },
         education: {
@@ -48,12 +60,14 @@ const translations = {
             degree1: {
                 title: "Grado en Ingeniería Informática",
                 institution: "Universidad de Sevilla",
-                date: "2017 - 2025"
+                date: "2015 - 2025",
+                description: "<strong>Especialización:</strong> Tecnologías Informáticas<br><strong>Trabajo de Fin de Grado:</strong> Diseño e implementación de un sistema de control hospitalario, aplicando ASP.NET (C#) y MVC<br><strong>Competencias:</strong> Base sólida en desarrollo Backend con Java (Spring) y .NET/C#"
             },
             degree2: {
                 title: "Técnico Superior en Sistemas de Telecomunicaciones e Informática",
                 institution: "Juan de la Cierva",
-                date: "2015 - 2017"
+                date: "2013 - 2015",
+                description: "<strong>Rama:</strong> Tecnología<br><strong>Formación:</strong> Base en sistemas, redes e infraestructuras de IT<br><strong>Proyecto Destacado:</strong> Diseño e implementación de un sistema de control de piscinas, aplicando Android Studio (Java)"
             }
         },
         projects: {
@@ -117,16 +131,28 @@ const translations = {
         experience: {
             title: "Work Experience",
             job1: {
-                title: "Backend Dev",
-                company: "Freelancer - Small local companies",
+                title: "Freelancer",
+                company: "Small local companies",
                 date: "06/2025 - Present",
-                description: "Integration of solutions through web application development with Oracle databases. Design, writing and implementation of microservices with solid experience in Java. Focus on unit, integration and E2E testing. Maintenance, optimization and updating of services. Collaboration with multidisciplinary teams (DevOps, stakeholders). Support and improvement of services for Barceló Hotels."
+                description: "Integration of solutions through web application development with Oracle databases."
             },
             job2: {
-                title: "Software Dev / RPA",
+                title: "Back-end Developer",
                 company: "VIRTUALCAVE",
                 date: "10/2024 - 04/2025",
+                description: "Design, writing and implementation of microservices with solid experience in Java. Focus on unit, integration and E2E testing. Maintenance, optimization and updating of services. Collaboration with multidisciplinary teams (DevOps, stakeholders). Support and improvement of services for Barceló Hotels."
+            },
+            job3: {
+                title: "RPA Developer",
+                company: "SERVINFORM S.A.",
+                date: "07/2022 - 09/2024",
                 description: "Integration of solutions in PL/SQL and NoSQL databases. Software development aligned with specifications and best practices. Solid base in Java (version 8 onwards) and .NET with frameworks like Spring Boot, Liferay, ASP.NET. Design, orchestration and optimization of end-to-end automations. Process automation for clients (Unicaja, etc.) achieving fewer errors and greater speed in key operations. File processing (Excel, CSV, PDF) and extraction of structured data for business efficiency."
+            },
+            job4: {
+                title: "Junior Developer - Internship",
+                company: "INEBIR TECHNOLOGY S.L.",
+                date: "03/2022 - 04/2022",
+                description: "Research of IoT solutions focused on the healthcare sector. Development of mobile application connected with IoT telecommunication technologies."
             }
         },
         education: {
@@ -134,12 +160,14 @@ const translations = {
             degree1: {
                 title: "Computer Science Engineering Degree",
                 institution: "University of Seville",
-                date: "2017 - 2025"
+                date: "2015 - 2025",
+                description: "<strong>Specialization:</strong> Information Technologies<br><strong>Final Degree Project:</strong> Design and implementation of a hospital control system, applying ASP.NET (C#) and MVC<br><strong>Competencies:</strong> Solid base in Backend development with Java (Spring) and .NET/C#"
             },
             degree2: {
                 title: "Higher Technician in Telecommunications and IT Systems",
                 institution: "Juan de la Cierva",
-                date: "2015 - 2017"
+                date: "2013 - 2015",
+                description: "<strong>Branch:</strong> Technology<br><strong>Training:</strong> Base in systems, networks and IT infrastructures<br><strong>Featured Project:</strong> Design and implementation of a pool control system, applying Android Studio (Java)"
             }
         },
         projects: {
@@ -203,16 +231,28 @@ const translations = {
         experience: {
             title: "Doświadczenie Pracy",
             job1: {
-                title: "Backend Dev",
-                company: "Freelancer - Małe lokalne firmy",
+                title: "Freelancer",
+                company: "Małe lokalne firmy",
                 date: "06/2025 - Obecnie",
-                description: "Integracja rozwiązań poprzez tworzenie aplikacji internetowych z bazami danych Oracle. Projektowanie, pisanie i wdrażanie mikrousług z solidnym doświadczeniem w Javie. Nacisk na testy jednostkowe, integracyjne i E2E. Utrzymanie, optymalizacja i aktualizacja usług. Współpraca z zespołami multidyscyplinarnymi (DevOps, interesariusze). Wsparcie i ulepszanie usług dla Hotelów Barceló."
+                description: "Integracja rozwiązań poprzez tworzenie aplikacji z bazami danych Oracle."
             },
             job2: {
-                title: "Software Dev / RPA",
+                title: "Back-end Developer",
                 company: "VIRTUALCAVE",
                 date: "10/2024 - 04/2025",
+                description: "Projektowanie, pisanie i wdrażanie mikrousług z solidnym doświadczeniem w Javie. Nacisk na testy jednostkowe, integracyjne i E2E. Utrzymanie, optymalizacja i aktualizacja usług. Współpraca z zespołami multidyscyplinarnymi (DevOps, interesariusze). Wsparcie i ulepszanie usług dla Hotelów Barceló."
+            },
+            job3: {
+                title: "RPA Developer",
+                company: "SERVINFORM S.A.",
+                date: "07/2022 - 09/2024",
                 description: "Integracja rozwiązań w PL/SQL i bazach danych NoSQL. Rozwój oprogramowania zgodny ze specyfikacjami i najlepszymi praktykami. Solidna podstawa w Javie (wersja 8 wzwyż) i .NET z frameworkami jak Spring Boot, Liferay, ASP.NET. Projektowanie, orkiestracja i optymalizacja automatyzacji end-to-end. Automatyzacja procesów dla klientów (Unicaja, itp.) osiągając mniej błędów i większą szybkość w kluczowych operacjach. Przetwarzanie plików (Excel, CSV, PDF) i ekstrakcja danych strukturalnych dla efektywności biznesowej."
+            },
+            job4: {
+                title: "Junior Developer - Praktyki",
+                company: "INEBIR TECHNOLOGY S.L.",
+                date: "03/2022 - 04/2022",
+                description: "Badania rozwiązań IoT skoncentrowanych na sektorze opieki zdrowotnej. Rozwój aplikacji mobilnej połączonej z technologiami telekomunikacyjnymi IoT."
             }
         },
         education: {
@@ -220,12 +260,14 @@ const translations = {
             degree1: {
                 title: "Licencjat z Informatyki",
                 institution: "Uniwersytet w Sewilli",
-                date: "2017 - 2025"
+                date: "2015 - 2025",
+                description: "<strong>Specjalizacja:</strong> Technologie Informatyczne<br><strong>Praca Dyplomowa:</strong> Projektowanie i implementacja systemu kontroli szpitalnej, stosując ASP.NET (C#) i MVC<br><strong>Kompetencje:</strong> Solidna podstawa w rozwoju Backend z Java (Spring) i .NET/C#"
             },
             degree2: {
                 title: "Wyższy Technik Systemów Telekomunikacyjnych i Informatycznych",
                 institution: "Juan de la Cierva",
-                date: "2015 - 2017"
+                date: "2013 - 2015",
+                description: "<strong>Dział:</strong> Technologia<br><strong>Szkolenie:</strong> Podstawa w systemach, sieciach i infrastrukturach IT<br><strong>Projekt Wyróżniający:</strong> Projektowanie i implementacja systemu kontroli basenów, stosując Android Studio (Java)"
             }
         },
         projects: {
@@ -314,7 +356,7 @@ function changeLanguage(lang) {
             sections[i].querySelector('h2').textContent = t.experience.title;
             
             const expItems = sections[i].querySelectorAll('.experience-item');
-            if (expItems.length >= 2) {
+            if (expItems.length >= 4) {
                 expItems[0].querySelector('.experience-title').textContent = t.experience.job1.title;
                 expItems[0].querySelector('.experience-company').textContent = t.experience.job1.company;
                 expItems[0].querySelector('.experience-date').textContent = t.experience.job1.date;
@@ -324,6 +366,16 @@ function changeLanguage(lang) {
                 expItems[1].querySelector('.experience-company').textContent = t.experience.job2.company;
                 expItems[1].querySelector('.experience-date').textContent = t.experience.job2.date;
                 expItems[1].querySelector('.experience-description').textContent = t.experience.job2.description;
+                
+                expItems[2].querySelector('.experience-title').textContent = t.experience.job3.title;
+                expItems[2].querySelector('.experience-company').textContent = t.experience.job3.company;
+                expItems[2].querySelector('.experience-date').textContent = t.experience.job3.date;
+                expItems[2].querySelector('.experience-description').textContent = t.experience.job3.description;
+                
+                expItems[3].querySelector('.experience-title').textContent = t.experience.job4.title;
+                expItems[3].querySelector('.experience-company').textContent = t.experience.job4.company;
+                expItems[3].querySelector('.experience-date').textContent = t.experience.job4.date;
+                expItems[3].querySelector('.experience-description').textContent = t.experience.job4.description;
             }
             break;
         }
@@ -340,10 +392,12 @@ function changeLanguage(lang) {
                 eduItems[0].querySelector('.education-title').textContent = t.education.degree1.title;
                 eduItems[0].querySelector('.education-institution').textContent = t.education.degree1.institution;
                 eduItems[0].querySelector('.education-date').textContent = t.education.degree1.date;
+                eduItems[0].querySelector('.education-description').innerHTML = t.education.degree1.description;
                 
                 eduItems[1].querySelector('.education-title').textContent = t.education.degree2.title;
                 eduItems[1].querySelector('.education-institution').textContent = t.education.degree2.institution;
                 eduItems[1].querySelector('.education-date').textContent = t.education.degree2.date;
+                eduItems[1].querySelector('.education-description').innerHTML = t.education.degree2.description;
             }
             break;
         }
