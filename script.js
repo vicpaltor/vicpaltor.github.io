@@ -67,6 +67,11 @@ const translations = {
                 title: "Sistema de Control de Piscinas",
                 description: "Aplicación móvil desarrollada con Android Studio (Java) para monitorización y control automatizado de sistemas de piscinas. Integración con sensores IoT para gestión en tiempo real.",
                 button: "Ver Proyecto"
+            },
+            project3: {
+                title: "PoC - Gestión Tributaria Legacy",
+                description: "Prueba de concepto para migración de sistema tributario desde Oracle Forms a arquitectura Java + PL/SQL. Simulación de valoración catastral con integración de sistema legacy.",
+                button: "Ver Código en GitHub"
             }
         }
     },
@@ -138,6 +143,11 @@ const translations = {
                 title: "Pool Control System",
                 description: "Mobile application developed with Android Studio (Java) for monitoring and automated control of pool systems. Integration with IoT sensors for real-time management.",
                 button: "View Project"
+            },
+            project3: {
+                title: "PoC - Tax Management Legacy System",
+                description: "Proof of concept for tax system migration from Oracle Forms to Java + PL/SQL architecture. Catastral valuation simulation with legacy system integration.",
+                button: "View Code on GitHub"
             }
         }
     },
@@ -209,6 +219,11 @@ const translations = {
                 title: "System Kontroli Basenów",
                 description: "Aplikacja mobilna opracowana z Android Studio (Java) do monitorowania i zautomatyzowanej kontroli systemów basenowych. Integracja z czujnikami IoT do zarządzania w czasie rzeczywistym.",
                 button: "Zobacz Projekt"
+            },
+            project3: {
+                title: "PoC - System Zarządzania Podatkami Legacy",
+                description: "Koncepcja proof dla migracji systemu podatkowego z Oracle Forms do architektury Java + PL/SQL. Symulacja wyceny katastralnej z integracją systemu legacy.",
+                button: "Zobacz Kod na GitHub"
             }
         }
     }
@@ -351,6 +366,12 @@ function openModal(projectType) {
                                  'System Kontroli Basenów';
         demoContainer.innerHTML = getPoolDemo();
         startPoolDemo();
+    } else if (projectType === 'tributary') {
+        modalTitle.textContent = currentLang === 'es' ? 'PoC - Gestión Tributaria Legacy' : 
+                                 currentLang === 'en' ? 'PoC - Tax Management Legacy System' : 
+                                 'PoC - System Zarządzania Podatkami Legacy';
+        demoContainer.innerHTML = getTributariaDemo();
+        startTributariaDemo();
     }
 }
 
@@ -460,6 +481,139 @@ function getPoolDemo() {
     `;
 }
 
+function getTributariaDemo() {
+    const titleText = currentLang === 'es' ? 'Sistema de Valoración Catastral' : 
+                     currentLang === 'en' ? 'Catastral Valuation System' : 
+                     'System Wyceny Katastralnej';
+    
+    const propertyData = [
+        { id: '101', address: 'Calle Mayor 45', zone: 'CENTRO', m2: 120, value: '€240,000' },
+        { id: '102', address: 'Avenida del Sol 23', zone: 'PERIFERIA', m2: 85, value: '€85,000' },
+        { id: '103', address: 'Plaza Central 12', zone: 'CENTRO', m2: 95, value: '€190,000' },
+        { id: '104', address: 'Calle Luna 8', zone: 'DEFAULT', m2: 150, value: '€75,000' }
+    ];
+    
+    let propertyCards = '';
+    propertyData.forEach(property => {
+        const zoneColor = property.zone === 'CENTRO' ? '#28a745' : 
+                         property.zone === 'PERIFERIA' ? '#ffc107' : '#6c757d';
+        
+        propertyCards += `
+            <div class="property-card" onclick="selectProperty('${property.id}')">
+                <div style="display: flex; justify-content: space-between; align-items: start;">
+                    <div style="flex: 1;">
+                        <strong>${currentLang === 'es' ? 'Inmueble' : currentLang === 'en' ? 'Property' : 'Nieruchomość'} ${property.id}</strong>
+                        <div style="color: var(--text-light); font-size: 0.9rem; margin-top: 5px;">
+                            ${property.address}
+                        </div>
+                        <div style="margin-top: 8px;">
+                            <span class="zone-badge" style="background: ${zoneColor}; color: white; padding: 2px 8px; border-radius: 12px; font-size: 0.8rem;">
+                                ${property.zone}
+                            </span>
+                            <span style="margin-left: 8px; color: var(--text-light); font-size: 0.9rem;">
+                                ${property.m2} m²
+                            </span>
+                        </div>
+                    </div>
+                    <div style="text-align: right;">
+                        <div style="font-weight: bold; color: var(--primary-color); font-size: 1.1rem;">
+                            ${property.value}
+                        </div>
+                        <div style="color: var(--text-light); font-size: 0.8rem; margin-top: 2px;">
+                            ${currentLang === 'es' ? 'Valor catastral' : currentLang === 'en' ? 'Catastral value' : 'Wartość katastralna'}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+    });
+    
+    return `
+        <div class="tributaria-demo">
+            <h3>${titleText}</h3>
+            
+            <div class="dashboard-grid">
+                <div class="metric-card">
+                    <h4>${currentLang === 'es' ? 'Declaraciones Procesadas' : 
+                           currentLang === 'en' ? 'Processed Returns' : 
+                           'Przetworzone Deklaracje'}</h4>
+                    <div class="metric-value" id="processedReturns">1,247</div>
+                    <div class="metric-change positive">+12.5%</div>
+                </div>
+                <div class="metric-card">
+                    <h4>${currentLang === 'es' ? 'Pendientes de Revisión' : 
+                           currentLang === 'en' ? 'Pending Review' : 
+                           'Oczekujące na Przegląd'}</h4>
+                    <div class="metric-value" id="pendingReview">23</div>
+                    <div class="metric-change negative">-8.3%</div>
+                </div>
+                <div class="metric-card">
+                    <h4>${currentLang === 'es' ? 'Recaudación Mensual' : 
+                           currentLang === 'en' ? 'Monthly Collection' : 
+                           'Miesięczne Zbiórki'}</h4>
+                    <div class="metric-value" id="monthlyCollection">€2.4M</div>
+                    <div class="metric-change positive">+5.2%</div>
+                </div>
+            </div>
+            
+            <div class="legacy-integration">
+                <h4>${currentLang === 'es' ? 'Integración con Sistema Legacy' : 
+                       currentLang === 'en' ? 'Legacy System Integration' : 
+                       'Integracja z Systemem Legacy'}</h4>
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <div class="connection-status" id="legacyStatus">
+                        <span class="status-indicator online"></span>
+                        <span id="statusText">${currentLang === 'es' ? 'Conectado a Oracle Database' : 
+                                            currentLang === 'en' ? 'Connected to Oracle Database' : 
+                                            'Połączono z Oracle Database'}</span>
+                    </div>
+                    <div class="transaction-info">
+                        <span style="color: var(--text-light); font-size: 0.9rem;">
+                            ${currentLang === 'es' ? 'Transacciones activas:' : currentLang === 'en' ? 'Active transactions:' : 'Aktywne transakcje:'}
+                        </span>
+                        <span id="transactionCount" style="font-weight: bold; margin-left: 5px;">3</span>
+                    </div>
+                </div>
+            </div>
+            
+            <h4 style="margin: 25px 0 15px 0;">
+                ${currentLang === 'es' ? 'Propiedades Recientes' : 
+                 currentLang === 'en' ? 'Recent Properties' : 
+                 'Ostatnie Nieruchomości'}
+            </h4>
+            <div id="propertyList">
+                ${propertyCards}
+            </div>
+            
+            <div class="control-panel">
+                <h4>${currentLang === 'es' ? 'Panel de Control' : 
+                       currentLang === 'en' ? 'Control Panel' : 
+                       'Panel Sterowania'}</h4>
+                <button class="control-button" onclick="simulateProcessing()">
+                    ${currentLang === 'es' ? 'Simular Procesamiento' : 
+                     currentLang === 'en' ? 'Simulate Processing' : 
+                     'Symuluj Przetwarzanie'}
+                </button>
+                <button class="control-button" onclick="validateData()">
+                    ${currentLang === 'es' ? 'Validar Datos' : 
+                     currentLang === 'en' ? 'Validate Data' : 
+                     'Waliduj Dane'}
+                </button>
+                <button class="control-button" onclick="generateReport()">
+                    ${currentLang === 'es' ? 'Generar Informe' : 
+                     currentLang === 'en' ? 'Generate Report' : 
+                     'Generuj Raport'}
+                </button>
+                <button class="control-button" onclick="checkLegacyConnection()">
+                    ${currentLang === 'es' ? 'Verificar Conexión' : 
+                     currentLang === 'en' ? 'Check Connection' : 
+                     'Sprawdź Połączenie'}
+                </button>
+            </div>
+        </div>
+    `;
+}
+
 // Demo Interactive Functions
 function startHospitalDemo() {
     // Simulate real-time updates
@@ -559,6 +713,152 @@ function runDiagnostics() {
                    currentLang === 'en' ? 'Diagnostics completed - All systems functioning properly' : 
                    'Diagnostyka zakończona - Wszystkie systemy działają poprawnie';
     alert(message);
+}
+
+// Tax System Demo Interactive Functions
+function startTributariaDemo() {
+    window.demoInterval = setInterval(() => {
+        updateMetrics();
+        checkLegacyConnection();
+    }, 3000);
+}
+
+function updateMetrics() {
+    const processedReturns = document.getElementById('processedReturns');
+    const pendingReview = document.getElementById('pendingReview');
+    const monthlyCollection = document.getElementById('monthlyCollection');
+    const transactionCount = document.getElementById('transactionCount');
+    
+    if (processedReturns) {
+        const current = parseInt(processedReturns.textContent.replace(/,/g, ''));
+        const increment = Math.floor(Math.random() * 3) + 1;
+        processedReturns.textContent = (current + increment).toLocaleString();
+    }
+    
+    if (pendingReview) {
+        const current = parseInt(pendingReview.textContent);
+        const change = Math.random() > 0.5 ? 1 : -1;
+        const newValue = Math.max(0, current + change);
+        pendingReview.textContent = newValue;
+    }
+    
+    if (monthlyCollection) {
+        const current = parseFloat(monthlyCollection.textContent.replace(/[^0-9.]/g, ''));
+        const change = (Math.random() - 0.5) * 0.1;
+        const newValue = Math.max(0, current + change);
+        monthlyCollection.textContent = '€' + newValue.toFixed(1) + 'M';
+    }
+    
+    if (transactionCount) {
+        const count = Math.floor(Math.random() * 5) + 1;
+        transactionCount.textContent = count;
+    }
+}
+
+function selectProperty(propertyId) {
+    const message = currentLang === 'es' ? `Propiedad seleccionada: ${propertyId}` : 
+                   currentLang === 'en' ? `Property selected: ${propertyId}` : 
+                   `Wybrano nieruchomość: ${propertyId}`;
+    console.log(message);
+    
+    // Highlight selected property
+    const cards = document.querySelectorAll('.property-card');
+    cards.forEach(card => card.style.border = '1px solid var(--border-color)');
+    event.currentTarget.style.border = '2px solid var(--primary-color)';
+}
+
+function simulateProcessing() {
+    const message = currentLang === 'es' ? 'Iniciando procesamiento de declaraciones...' : 
+                   currentLang === 'en' ? 'Starting tax return processing...' : 
+                   'Rozpoczynanie przetwarzania deklaracji...';
+    
+    console.log(message);
+    
+    // Simulate processing animation
+    const metrics = document.querySelectorAll('.metric-value');
+    metrics.forEach(metric => {
+        metric.style.opacity = '0.5';
+        setTimeout(() => {
+            metric.style.opacity = '1';
+        }, 1500);
+    });
+    
+    // Show completion message
+    setTimeout(() => {
+        const completionMessage = currentLang === 'es' ? '¡Procesamiento completado con éxito!' : 
+                                 currentLang === 'en' ? 'Processing completed successfully!' : 
+                                 'Przetwarzanie zakończone pomyślnie!';
+        console.log(completionMessage);
+    }, 2000);
+}
+
+function validateData() {
+    const message = currentLang === 'es' ? 'Validando integridad de datos...' : 
+                   currentLang === 'en' ? 'Validating data integrity...' : 
+                   'Walidacja integralności danych...';
+    
+    console.log(message);
+    
+    // Simulate validation
+    const statusText = document.getElementById('statusText');
+    if (statusText) {
+        const originalText = statusText.textContent;
+        statusText.textContent = currentLang === 'es' ? 'Validando datos...' : 
+                                currentLang === 'en' ? 'Validating data...' : 
+                                'Walidacja danych...';
+        statusText.style.color = '#ffc107';
+        
+        setTimeout(() => {
+            statusText.textContent = originalText;
+            statusText.style.color = '';
+        }, 2000);
+    }
+}
+
+function generateReport() {
+    const message = currentLang === 'es' ? 'Generando informe de valoración catastral...' : 
+                   currentLang === 'en' ? 'Generating catastral valuation report...' : 
+                   'Generowanie raportu wyceny katastralnej...';
+    
+    console.log(message);
+    
+    // Simulate report generation
+    const propertyList = document.getElementById('propertyList');
+    if (propertyList) {
+        const originalBg = propertyList.style.backgroundColor;
+        propertyList.style.backgroundColor = 'rgba(0, 123, 255, 0.1)';
+        
+        setTimeout(() => {
+            propertyList.style.backgroundColor = originalBg;
+            const completionMessage = currentLang === 'es' ? 'Informe generado exitosamente' : 
+                                     currentLang === 'en' ? 'Report generated successfully' : 
+                                     'Raport wygenerowany pomyślnie';
+            console.log(completionMessage);
+        }, 1500);
+    }
+}
+
+function checkLegacyConnection() {
+    const statusElement = document.getElementById('legacyStatus');
+    const statusIndicator = statusElement.querySelector('.status-indicator');
+    const statusText = document.getElementById('statusText');
+    
+    if (statusElement && statusIndicator && statusText) {
+        // Simulate connection check
+        statusIndicator.classList.remove('online');
+        statusIndicator.classList.add('checking');
+        statusText.textContent = currentLang === 'es' ? 'Verificando conexión...' : 
+                                currentLang === 'en' ? 'Checking connection...' : 
+                                'Sprawdzanie połączenia...';
+        
+        setTimeout(() => {
+            statusIndicator.classList.remove('checking');
+            statusIndicator.classList.add('online');
+            statusText.textContent = currentLang === 'es' ? 'Conectado a Oracle Database' : 
+                                    currentLang === 'en' ? 'Connected to Oracle Database' : 
+                                    'Połączono z Oracle Database';
+        }, 1500);
+    }
 }
 
 // Close modal when clicking outside
