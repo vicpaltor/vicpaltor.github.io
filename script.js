@@ -356,7 +356,7 @@ function changeLanguage(lang) {
             sections[i].querySelector('h2').textContent = t.projects.title;
             
             const projects = sections[i].querySelectorAll('.project');
-            if (projects.length >= 2) {
+            if (projects.length >= 5) {
                 projects[0].querySelector('h3').textContent = t.projects.project1.title;
                 projects[0].querySelector('p').textContent = t.projects.project1.description;
                 projects[0].querySelector('.btn').textContent = t.projects.project1.button;
@@ -364,6 +364,18 @@ function changeLanguage(lang) {
                 projects[1].querySelector('h3').textContent = t.projects.project2.title;
                 projects[1].querySelector('p').textContent = t.projects.project2.description;
                 projects[1].querySelector('.btn').textContent = t.projects.project2.button;
+                
+                projects[2].querySelector('h3').textContent = t.projects.project3.title;
+                projects[2].querySelector('p').textContent = t.projects.project3.description;
+                projects[2].querySelector('.btn').textContent = t.projects.project3.button;
+                
+                projects[3].querySelector('h3').textContent = t.projects.project4.title;
+                projects[3].querySelector('p').textContent = t.projects.project4.description;
+                projects[3].querySelector('.btn').textContent = t.projects.project4.button;
+                
+                projects[4].querySelector('h3').textContent = t.projects.project5.title;
+                projects[4].querySelector('p').textContent = t.projects.project5.description;
+                projects[4].querySelector('.btn').textContent = t.projects.project5.button;
             }
             break;
         }
