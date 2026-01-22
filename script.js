@@ -331,6 +331,244 @@ function changeLanguage(lang) {
     document.querySelector(`[data-lang="${lang}"]`).classList.add('active');
 }
 
+// Modal Functions
+function openModal(projectType) {
+    const modal = document.getElementById('projectModal');
+    const modalTitle = document.getElementById('modalTitle');
+    const demoContainer = document.getElementById('demoContainer');
+    
+    modal.classList.add('active');
+    
+    if (projectType === 'hospital') {
+        modalTitle.textContent = currentLang === 'es' ? 'Sistema de Control Hospitalario' : 
+                                 currentLang === 'en' ? 'Hospital Control System' : 
+                                 'System Kontroli Szpitalnej';
+        demoContainer.innerHTML = getHospitalDemo();
+        startHospitalDemo();
+    } else if (projectType === 'pool') {
+        modalTitle.textContent = currentLang === 'es' ? 'Sistema de Control de Piscinas' : 
+                                 currentLang === 'en' ? 'Pool Control System' : 
+                                 'System Kontroli Basenów';
+        demoContainer.innerHTML = getPoolDemo();
+        startPoolDemo();
+    }
+}
+
+function closeModal() {
+    const modal = document.getElementById('projectModal');
+    modal.classList.remove('active');
+    
+    // Clear any running intervals
+    if (window.demoInterval) {
+        clearInterval(window.demoInterval);
+    }
+}
+
+// Demo Content Generators
+function getHospitalDemo() {
+    const titleText = currentLang === 'es' ? 'Pacientes Activos' : 
+                     currentLang === 'en' ? 'Active Patients' : 
+                     'Aktywni Pacjenci';
+    
+    const patientData = [
+        { name: 'Juan Pérez', room: '101', status: 'stable', statusText: currentLang === 'es' ? 'Estable' : currentLang === 'en' ? 'Stable' : 'Stabilny' },
+        { name: 'María García', room: '102', status: 'critical', statusText: currentLang === 'es' ? 'Crítico' : currentLang === 'en' ? 'Critical' : 'Krytyczny' },
+        { name: 'Carlos López', room: '103', status: 'recovering', statusText: currentLang === 'es' ? 'Recuperando' : currentLang === 'en' ? 'Recovering' : 'W rekonwalescencji' },
+        { name: 'Ana Martínez', room: '104', status: 'stable', statusText: currentLang === 'es' ? 'Estable' : currentLang === 'en' ? 'Stable' : 'Stabilny' }
+    ];
+    
+    let patientCards = '';
+    patientData.forEach(patient => {
+        patientCards += `
+            <div class="patient-card" onclick="selectPatient('${patient.name}')">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                        <strong>${patient.name}</strong>
+                        <div style="color: var(--text-light); font-size: 0.9rem; margin-top: 5px;">
+                            ${currentLang === 'es' ? 'Habitación' : currentLang === 'en' ? 'Room' : 'Pokój'}: ${patient.room}
+                        </div>
+                    </div>
+                    <span class="patient-status status-${patient.status}">${patient.statusText}</span>
+                </div>
+            </div>
+        `;
+    });
+    
+    return `
+        <div class="hospital-demo">
+            <h3>${titleText}</h3>
+            <div class="data-display" id="systemStatus">
+                ${currentLang === 'es' ? 'Sistema en línea - Última actualización: ' : 
+                  currentLang === 'en' ? 'System online - Last update: ' : 
+                  'System online - Ostatnia aktualizacja: '}${new Date().toLocaleTimeString()}
+            </div>
+            <div id="patientList">
+                ${patientCards}
+            </div>
+            <div class="control-panel">
+                <h4>${currentLang === 'es' ? 'Panel de Control' : 
+                       currentLang === 'en' ? 'Control Panel' : 
+                       'Panel Sterowania'}</h4>
+                <button class="control-button" onclick="refreshPatients()">
+                    ${currentLang === 'es' ? 'Actualizar Pacientes' : 
+                     currentLang === 'en' ? 'Refresh Patients' : 
+                     'Odśwież Pacjentów'}
+                </button>
+                <button class="control-button" onclick="showAlerts()">
+                    ${currentLang === 'es' ? 'Ver Alertas' : 
+                     currentLang === 'en' ? 'View Alerts' : 
+                     'Zobacz Alerty'}
+                </button>
+            </div>
+        </div>
+    `;
+}
+
+function getPoolDemo() {
+    const titleText = currentLang === 'es' ? 'Monitorización en Tiempo Real' : 
+                     currentLang === 'en' ? 'Real-time Monitoring' : 
+                     'Monitorowanie w Czasie Rzeczywistym';
+    
+    return `
+        <div class="pool-demo">
+            <h3>${titleText}</h3>
+            <div class="pool-container">
+                <div class="pool-water"></div>
+                <div class="sensor-indicator" style="top: 20px; left: 20px;"></div>
+                <div class="sensor-indicator" style="top: 20px; right: 20px;"></div>
+                <div class="sensor-indicator" style="bottom: 20px; left: 50%; transform: translateX(-50%);"></div>
+            </div>
+            <div class="data-display" id="poolData">
+                <div><strong>${currentLang === 'es' ? 'Temperatura' : currentLang === 'en' ? 'Temperature' : 'Temperatura'}:</strong> <span id="temp">24.5°C</span></div>
+                <div><strong>pH:</strong> <span id="ph">7.2</span></div>
+                <div><strong>${currentLang === 'es' ? 'Nivel Cloro' : currentLang === 'en' ? 'Chlorine Level' : 'Poziom Chloru'}:</strong> <span id="chlorine">1.2 ppm</span></div>
+                <div><strong>${currentLang === 'es' ? 'Estado Bomba' : currentLang === 'en' ? 'Pump Status' : 'Status Pompy'}:</strong> <span id="pumpStatus" style="color: #4caf50;">${currentLang === 'es' ? 'Activa' : currentLang === 'en' ? 'Active' : 'Aktywna'}</span></div>
+            </div>
+            <div class="control-panel">
+                <h4>${currentLang === 'es' ? 'Control Automático' : currentLang === 'en' ? 'Automatic Control' : 'Sterowanie Automatyczne'}</h4>
+                <button class="control-button" onclick="togglePump()">
+                    ${currentLang === 'es' ? 'Alternar Bomba' : currentLang === 'en' ? 'Toggle Pump' : 'Przełącz Pompy'}
+                </button>
+                <button class="control-button" onclick="adjustChemicals()">
+                    ${currentLang === 'es' ? 'Ajustar Químicos' : currentLang === 'en' ? 'Adjust Chemicals' : 'Reguluj Chemiczne'}
+                </button>
+                <button class="control-button" onclick="runDiagnostics()">
+                    ${currentLang === 'es' ? 'Diagnóstico' : currentLang === 'en' ? 'Diagnostics' : 'Diagnostyka'}
+                </button>
+            </div>
+        </div>
+    `;
+}
+
+// Demo Interactive Functions
+function startHospitalDemo() {
+    // Simulate real-time updates
+    window.demoInterval = setInterval(() => {
+        const statusElement = document.getElementById('systemStatus');
+        if (statusElement) {
+            const timeText = currentLang === 'es' ? 'Sistema en línea - Última actualización: ' : 
+                           currentLang === 'en' ? 'System online - Last update: ' : 
+                           'System online - Ostatnia aktualizacja: ';
+            statusElement.innerHTML = timeText + new Date().toLocaleTimeString();
+        }
+    }, 1000);
+}
+
+function startPoolDemo() {
+    // Simulate sensor data updates
+    window.demoInterval = setInterval(() => {
+        const tempElement = document.getElementById('temp');
+        const phElement = document.getElementById('ph');
+        const chlorineElement = document.getElementById('chlorine');
+        
+        if (tempElement) {
+            const temp = (24 + Math.random() * 2).toFixed(1);
+            tempElement.textContent = temp + '°C';
+        }
+        
+        if (phElement) {
+            const ph = (7.0 + Math.random() * 0.4).toFixed(1);
+            phElement.textContent = ph;
+        }
+        
+        if (chlorineElement) {
+            const chlorine = (1.0 + Math.random() * 0.5).toFixed(1);
+            chlorineElement.textContent = chlorine + ' ppm';
+        }
+    }, 2000);
+}
+
+function selectPatient(name) {
+    const message = currentLang === 'es' ? `Paciente seleccionado: ${name}` : 
+                   currentLang === 'en' ? `Patient selected: ${name}` : 
+                   `Wybrany pacjent: ${name}`;
+    alert(message);
+}
+
+function refreshPatients() {
+    const patientList = document.getElementById('patientList');
+    if (patientList) {
+        patientList.style.opacity = '0.5';
+        setTimeout(() => {
+            patientList.style.opacity = '1';
+            const message = currentLang === 'es' ? 'Pacientes actualizados' : 
+                           currentLang === 'en' ? 'Patients refreshed' : 
+                           'Pacjenci odświeżeni';
+            console.log(message);
+        }, 500);
+    }
+}
+
+function showAlerts() {
+    const message = currentLang === 'es' ? 'No hay alertas activas' : 
+                   currentLang === 'en' ? 'No active alerts' : 
+                   'Brak aktywnych alertów';
+    alert(message);
+}
+
+function togglePump() {
+    const pumpStatus = document.getElementById('pumpStatus');
+    if (pumpStatus) {
+        const isActive = pumpStatus.textContent.includes('Active') || 
+                        pumpStatus.textContent.includes('Activa') || 
+                        pumpStatus.textContent.includes('Aktywna');
+        
+        if (isActive) {
+            pumpStatus.textContent = currentLang === 'es' ? 'Inactiva' : 
+                                   currentLang === 'en' ? 'Inactive' : 
+                                   'Nieaktywna';
+            pumpStatus.style.color = '#dc3545';
+        } else {
+            pumpStatus.textContent = currentLang === 'es' ? 'Activa' : 
+                                   currentLang === 'en' ? 'Active' : 
+                                   'Aktywna';
+            pumpStatus.style.color = '#4caf50';
+        }
+    }
+}
+
+function adjustChemicals() {
+    const message = currentLang === 'es' ? 'Ajustando niveles químicos...' : 
+                   currentLang === 'en' ? 'Adjusting chemical levels...' : 
+                   'Regulacja poziomów chemicznych...';
+    console.log(message);
+}
+
+function runDiagnostics() {
+    const message = currentLang === 'es' ? 'Diagnóstico completado - Todos los sistemas funcionan correctamente' : 
+                   currentLang === 'en' ? 'Diagnostics completed - All systems functioning properly' : 
+                   'Diagnostyka zakończona - Wszystkie systemy działają poprawnie';
+    alert(message);
+}
+
+// Close modal when clicking outside
+document.addEventListener('click', function(event) {
+    const modal = document.getElementById('projectModal');
+    if (event.target === modal) {
+        closeModal();
+    }
+});
+
 // Initialize language buttons
 document.addEventListener('DOMContentLoaded', function() {
     // Add click handlers to language buttons

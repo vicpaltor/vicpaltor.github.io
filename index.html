@@ -242,6 +242,7 @@
                 <h3>Sistema de Control Hospitalario (TFG)</h3>
                 <p>Diseño e implementación de un sistema integral para gestión hospitalaria utilizando ASP.NET (C#) y MVC. Aplicación web para optimizar el control de pacientes, citas y recursos médicos.</p>
                 <a href="https://github.com/vicpaltor/TFG_BedCheck_Proyect" class="btn" target="_blank">Ver Código en GitHub</a>
+                <button class="btn" onclick="openModal('hospital')" style="margin-left: 10px;">Ver Demo Interactiva</button>
             </div>
         </div>
 
@@ -249,12 +250,28 @@
             <div class="project-content">
                 <h3>Sistema de Control de Piscinas</h3>
                 <p>Aplicación móvil desarrollada con Android Studio (Java) para monitorización y control automatizado de sistemas de piscinas. Integración con sensores IoT para gestión en tiempo real.</p>
-                <a href="#" class="btn">Ver Proyecto</a>
+                <button class="btn" onclick="openModal('pool')">Ver Demo Interactiva</button>
             </div>
         </div>
 
     </section>
 
 </div>
+
+<!-- Modal Overlay -->
+<div id="projectModal" class="modal-overlay">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2 id="modalTitle">Título del Proyecto</h2>
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+        </div>
+        <div class="modal-body">
+            <div id="demoContainer" class="demo-container">
+                <!-- Demo content will be loaded here -->
+            </div>
+        </div>
+    </div>
+</div>
+
 </body>
 </html>
